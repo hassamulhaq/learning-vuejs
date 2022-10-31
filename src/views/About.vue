@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="alert alert-danger">
     About
   </div>
 </template>
