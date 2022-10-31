@@ -2,6 +2,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 import Home from "../views/Home.vue";
 import About from "../views/About.vue";
+import TemplateSyntax from "../components/TemplateSyntax.vue";
+import Product from "../components/Product.vue";
 
 const routes = [
     {
@@ -13,6 +15,16 @@ const routes = [
         path: '/about-us',
         name: 'about_us',
         component: About
+    },
+    {
+        path: '/template-syntax',
+        name: 'template-syntax',
+        component: TemplateSyntax
+    },
+    {
+        path: '/product',
+        name: 'product',
+        component: Product
     }
 ]
 

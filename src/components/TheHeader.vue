@@ -8,6 +8,12 @@
           <li>
             <router-link to="/about-us" class="nav-link">About Us</router-link>
           </li>
+          <li>
+            <router-link to="/template-syntax" class="nav-link">Template Syntax</router-link>
+          </li>
+          <li>
+            <router-link to="/product" class="nav-link">Product</router-link>
+          </li>
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
