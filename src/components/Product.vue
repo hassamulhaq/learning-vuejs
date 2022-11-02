@@ -20,21 +20,21 @@
             <strong v-else>Out of stock</strong>
           </div>
           <h5>$ {{ price }}</h5>
-          <div v-if="in_stock > 0" class="variants">
-            <div v-if="variants" v-for="{id, label, image, bg_color} in variants" v-bind:key="id" v-bind:style="bg_color">
+          <div class="variants">
+            <div v-if="variants" v-for="{index, id, label, bg_color} in variants" v-bind:key="id" v-bind:style="bg_color">
               <label>
-                <input type="radio" name="variants" v-bind:value="id" v-on:change="changeThumbnail(image)">
+                <input type="radio" name="variants" v-bind:value="id" v-on:change="updateVariant(index)">
                 {{ label }}
               </label>
             </div>
           </div>
-          <div v-if="in_stock > 0" class="attributes my-2">
+          <div v-if="in_stock" class="attributes my-2">
             <select name="" id="" class="form-control border border-dark">
               <option value="" selected disabled>choose</option>
               <option v-for="count in counts">{{ count }}</option>
             </select>
           </div>
-          <div class="d-flex gap-4">
+          <div class="d-flex gap-4 my-3">
             <button type="button" v-bind:disabled="!in_stock" v-on:click="addToCart()" class="btn btn-md btn-dark">Add to Cart</button>
             <button type="submit" v-bind:disabled="!in_stock" class="btn btn-md btn-dark">Checkout</button>
           </div>
@@ -58,27 +58,32 @@ export default {
       short_description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, illum natus nisi nulla perferendis praesentium qui tempora? Consequatur, modi rerum! Dicta dolorem iusto obcaecati possimus quidem ratione sapiente tempore, voluptatum!',
       variants: [
         {
+          index: 0,
           id: 1,
           label: 'Blue',
           image: './src/assets/images/socks_blue.jpg',
           price: 40,
-          bg_color: 'color: white;background-color: darkgreen;width: 76px;height: 26px;padding: 3px;'
+          bg_color: 'color: white;background-color: darkblue;width: 76px;height: 26px;padding: 3px;',
+          quantity: 0,
         },
         {
+          index: 1,
           id: 2,
           label: 'Green',
           image: './src/assets/images/socks_green.jpg',
           price: 42,
-          bg_color: 'color: white;background-color: darkblue;width: 76px;height: 26px;padding: 3px;'
+          bg_color: 'color: white;background-color: darkgreen;width: 76px;height: 26px;padding: 3px;',
+          quantity: 12
         }
       ],
       counts: [1, 2, 3, 4, 5, 6, 7, 8],
-      in_stock: 2,
+      // in_stock: 2,
       attributes: [
           'Size: XL',
           'Brand: Own',
           'Finishing: Tested'
-      ]
+      ],
+      selected_variant: 0
     }
   },
   methods: {
@@ -90,6 +95,20 @@ export default {
     },
     changeThumbnail(image) {
       this.image = image
+    },
+    updateVariant(index) {
+      this.selected_variant = index
+    }
+  },
+  computed: {
+    image() {
+      return this.variants[this.selected_variant].image
+    },
+    in_stock() {
+      return this.variants[this.selected_variant].quantity
+    },
+    price() {
+      return this.variants[this.selected_variant].price
     }
   }
 }
