@@ -21,7 +21,7 @@
           </div>
           <h5>$ {{ price }}</h5>
           <div v-if="in_stock > 0" class="variants">
-            <div v-if="variants" v-for="{id, label, image} in variants" v-bind:key="id">
+            <div v-if="variants" v-for="{id, label, image, bg_color} in variants" v-bind:key="id" v-bind:style="bg_color">
               <label>
                 <input type="radio" name="variants" v-bind:value="id" v-on:change="changeThumbnail(image)">
                 {{ label }}
@@ -35,8 +35,8 @@
             </select>
           </div>
           <div class="d-flex gap-4">
-            <button type="button" v-if="in_stock > 0" v-on:click="addToCart()" class="btn btn-md btn-dark">Add to Cart</button>
-            <button type="submit" class="btn btn-md btn-dark">Checkout</button>
+            <button type="button" v-bind:disabled="!in_stock" v-on:click="addToCart()" class="btn btn-md btn-dark">Add to Cart</button>
+            <button type="submit" v-bind:disabled="!in_stock" class="btn btn-md btn-dark">Checkout</button>
           </div>
         </div>
       </div>
@@ -62,16 +62,18 @@ export default {
           label: 'Blue',
           image: './src/assets/images/socks_blue.jpg',
           price: 40,
+          bg_color: 'color: white;background-color: darkgreen;width: 76px;height: 26px;padding: 3px;'
         },
         {
           id: 2,
           label: 'Green',
           image: './src/assets/images/socks_green.jpg',
           price: 42,
+          bg_color: 'color: white;background-color: darkblue;width: 76px;height: 26px;padding: 3px;'
         }
       ],
       counts: [1, 2, 3, 4, 5, 6, 7, 8],
-      in_stock: 6,
+      in_stock: 2,
       attributes: [
           'Size: XL',
           'Brand: Own',
@@ -94,6 +96,11 @@ export default {
 
 </script>
 
-<style scoped>
-
+<style>
+  .radio-green {
+    color: white;background-color: darkgreen;width: 76px;height: 26px;padding: 3px;
+  }
+  .radio-blue {
+    color: white;background-color: darkblue;width: 76px;height: 26px;padding: 3px;
+  }
 </style>
