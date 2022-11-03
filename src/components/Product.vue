@@ -9,7 +9,7 @@
           <div class="bg-dark text-white p-2 float-end rounded-1">
             Cart ({{ cart }})
           </div>
-          <h2>{{ title }}</h2>
+          <h2>{{ title_brand }}</h2>
           <p class="body-text"> {{ short_description }} </p>
           <div v-for="attribute in attributes" class="">
             {{ attribute }}
@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       cart: 0,
-      title: 'A4tech Gen 3 Mouse',
+      title: 'Gen 3 Mouse',
       sku: 'G4M01',
       price: 40,
       regular_price: 36,
@@ -83,7 +83,8 @@ export default {
           'Brand: Own',
           'Finishing: Tested'
       ],
-      selected_variant: 0
+      selected_variant: 0,
+      brand: 'A4Tech'
     }
   },
   methods: {
@@ -109,6 +110,9 @@ export default {
     },
     price() {
       return this.variants[this.selected_variant].price
+    },
+    title_brand() {
+      return this.title + ' - ' + this.brand
     }
   }
 }
