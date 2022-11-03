@@ -2,7 +2,10 @@
   <form action="" method="post" v-on:submit.prevent="submitForm()" enctype="multipart/form-data" autocomplete="off" novalidate>
     <div class="row border rounded border-dark p-2">
       <div class="col-6 product-image">
-        <img class="card-img-top" v-bind:src="image" alt="image">
+        <div>
+          <span class="bg-success text-white badge">{{ (onSale) ? 'On Sale' : null }}</span>
+          <div><img class="card-img-top" v-bind:src="image" alt="image"></div>
+        </div>
       </div>
       <div class="col-6 d-flex align-items-center">
         <div class="">
@@ -65,6 +68,7 @@ export default {
           price: 40,
           bg_color: 'color: white;background-color: darkblue;width: 76px;height: 26px;padding: 3px;',
           quantity: 0,
+          on_sale: false
         },
         {
           index: 1,
@@ -73,7 +77,8 @@ export default {
           image: './src/assets/images/socks_green.jpg',
           price: 42,
           bg_color: 'color: white;background-color: darkgreen;width: 76px;height: 26px;padding: 3px;',
-          quantity: 12
+          quantity: 12,
+          on_sale: true
         }
       ],
       counts: [1, 2, 3, 4, 5, 6, 7, 8],
@@ -113,6 +118,9 @@ export default {
     },
     title_brand() {
       return this.title + ' - ' + this.brand
+    },
+    onSale() {
+      return this.variants[this.selected_variant].on_sale
     }
   }
 }
